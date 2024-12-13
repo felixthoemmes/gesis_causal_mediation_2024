@@ -7,7 +7,7 @@
 library(tidyverse)
 
 
-df1 <- read_csv("https://raw.githubusercontent.com/felixthoemmes/gesis_causal_mediation_2022/main/exercise1.csv")
+df1 <- read_csv("https://raw.githubusercontent.com/felixthoemmes/gesis_causal_mediation_2024/main/exercise1.csv")
 
 
 # your code goes here ----------------------------------------------------------

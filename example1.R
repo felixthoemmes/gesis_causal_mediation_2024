@@ -11,7 +11,7 @@ library(emmeans)
 
 
 #download data from github
-df1 <- read_csv("https://raw.githubusercontent.com/felixthoemmes/gesis_causal_mediation_2022/main/example1.csv")
+df1 <- read_csv("https://raw.githubusercontent.com/felixthoemmes/gesis_causal_mediation_2024/main/example1.csv")
 
   
   # A set of regression ----------------------------------------------------------
@@ -64,7 +64,7 @@ coef(lm(Y ~ M * X, data = df2))[3] -> cprime1 # the c' path when M = 0
 #two b paths when M is at the mean level of X0 and the mean level of X1
 lmmodel <- lm(Y ~ M * X, data = df2)
 emmeans(lmmodel,c("X","M"),contr="revpairwise", weights="proportinal",
-        at=list(M=c(mean(df2$M[df2$X==0]),mean(df2$M[df2$X==1]))))$contrasts[c(1,6)]
+        at=list(M=c(round(mean(df2$M[df2$X==0]),2),mean(df2$M[df2$X==1]))))$contrasts[c(1,6)]
 
 #stringing effect together - note the alternative expression in the last line---
 cat("c path",round(c,2),"\n",
@@ -76,7 +76,7 @@ cat("c path",round(c,2),"\n",
     "a x b path (indirect effect for control group X=0)",round(a*b1,2),"\n",
     "a x b path (indirect effect for treated group X=1)",round(a*(b1+h),2),"\n",
     "simple direct effect for control group X=0",round((cprime1 + h*mean(df2$M[df2$X==0])),2),"\n",
-    "simple direct effect for control group X=1",round((cprime1 + h*mean(df2$M[df2$X==1])),2))
+    "simple direct effect for treatment group X=1",round((cprime1 + h*mean(df2$M[df2$X==1])),2))
 
 
 

@@ -9,7 +9,7 @@ library(magrittr)
 
 
 # Data            --------------------------------------------------------------
-df1 <- read_csv("https://raw.githubusercontent.com/felixthoemmes/gesis_causal_mediation_2022/main/example2.csv")
+df1 <- read_csv("https://raw.githubusercontent.com/felixthoemmes/gesis_causal_mediation_2024/main/example2.csv")
 
 
 # Effect estimation   ----------------------------------------------------------
