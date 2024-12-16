@@ -61,6 +61,3 @@ results <- cmest(
 
 # Summarize the results
 summary(results)
-
-
-
