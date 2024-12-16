@@ -10,7 +10,7 @@ library(tidyverse)
 library(mediation)
 library(regmedint)
 
-e#generate DAG ------------------------------------------------------------------
+#generate DAG ------------------------------------------------------------------
 
 
 

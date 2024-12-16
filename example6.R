@@ -1,3 +1,10 @@
+# File name:    example6.R
+# Author:       Felix Thoemmes             
+# Date:         11/1/2024
+
+
+# Load packages ----------------------------------------------------------------
+
 library(tidyverse)
 library(boot)
 library(emmeans)
