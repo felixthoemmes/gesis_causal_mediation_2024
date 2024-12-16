@@ -24,6 +24,7 @@ This repository contains all datasets for the 2024 Causal Mediation workshop
 | 4 - Assumptions             | example4.R     |      N/A       |
 | 5 - Causal mediation        | example5.R     | example5.csv   |
 | 6 - Design-based mediation  | example6.R     | example6.csv   |
+| 7 - Example using CMAverse  | example7.R     |      N/A       |
 
 
 ## Useful references
