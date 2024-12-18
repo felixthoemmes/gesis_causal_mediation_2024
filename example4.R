@@ -32,14 +32,55 @@ descendants(d1,"x")
 #for x to y (total effect)
 adjustmentSets(d1, type = "all")
 
-#for x to m (a path)
-adjustmentSets(d1,exposure = "x", outcome = "m", type = "all")
+#set C1 for M -> Y, while holding X constant
+adjustmentSets(d1,exposure = "m", outcome = "y", type = "all") -> setc1
 
-#for m to y (b path)
-adjustmentSets(d1,exposure = "m", outcome = "y", type = "all")
+isAdjustmentSet(d1, exposure = "m", outcome = "y", Z = c(setc1[[1]], "x"))
+isAdjustmentSet(d1, exposure = "m", outcome = "y", Z = c(setc1[[2]], "x"))
+isAdjustmentSet(d1, exposure = "m", outcome = "y", Z = c(setc1[[3]], "x"))
 
-#paths that do not traverse X
-paths(d1, from = "m", to = "y", Z = "w2") -> p
-p <- as_tibble(p)
+#confirming that it does not contain descendants of X
+intersect(setc1[[1]], descendants(d1,"x"))
+intersect(setc1[[2]], descendants(d1,"x"))
+intersect(setc1[[3]], descendants(d1,"x"))
 
-p %>% filter(!grepl('x', paths))
+#set C2 for X -> M
+adjustmentSets(d1,exposure = "x", outcome = "m", type = "all") -> setc2
+
+#check that union C1 and C2 is adjustment set for X to M
+union(setc1[[1]], setc2[[1]]) -> union1_1
+union1_1
+union(setc1[[2]], setc2[[1]]) -> union1_2
+union1_2
+union(setc1[[3]], setc2[[1]]) -> union1_3
+union1_3
+
+#all unions the same except union1
+isAdjustmentSet(d1, exposure = "x", outcome = "y", Z = union1_1)
+isAdjustmentSet(d1, exposure = "x", outcome = "y", Z = union1_2)
+
+#set C3 for x,m to y
+adjustmentSets(d1, exposure = c("x","m"), outcome = "y", type = "all") -> setc3
+
+union(setc1[[1]], setc3[[1]]) -> union2_1
+union(setc1[[2]], setc3[[1]]) -> union2_2
+union(setc1[[3]], setc3[[1]]) -> union2_3
+union(setc1[[1]], setc3[[2]]) -> union2_4
+union(setc1[[2]], setc3[[2]]) -> union2_5
+union(setc1[[3]], setc3[[2]]) -> union2_6
+
+
+#all unions the same except union2
+isAdjustmentSet(d1, exposure = "x", outcome = "y", Z = union2_1)
+isAdjustmentSet(d1, exposure = "x", outcome = "y", Z = union2_2)
+
+#final adjustment set for M-Y
+union1_1
+union1_2
+
+#final adjustment set for X,M -Y
+union(union1_1, union2_1)
+union(union1_1, union2_2)
+union(union1_2, union2_1)
+union(union1_2, union2_2)
+
