@@ -56,8 +56,24 @@ results <- cmest(
   yreg = "linear",         # Outcome regression type
   astar = 0,               # Control value of treatment
   a = 1,                   # Treated value of treatment
-  mval = list(mean(df1$M)) # Mediator vauee for CDE
+  mval = list(mean(df1$M)) # Mediator value for CDE
 )
 
 # Summarize the results
+results <- cmest(
+  data = df1,
+  model = "wb",            # Regression-based approach
+  outcome = "Y",           # Outcome variable
+  exposure = "X",          # Treatment variable
+  mediator = "M",          # Mediator variable
+  basec = "C",             # Confounder C
+  EMint = TRUE,            # Include X-M interaction
+  ereg = "logistic",       # Exposure regression type
+  yreg = "linear",         # Outcome regression type
+  astar = 0,               # Control value of treatment
+  a = 1,                   # Treated value of treatment
+  mval = list(mean(df1$M)) # Mediator value for CDE
+)
+
+
 summary(results)
